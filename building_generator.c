@@ -49,7 +49,7 @@ apartment_building generate_random_building(){
      building.year = MIN_YEAR + rand() % YEAR_RANGE;
      building.count_floors = MIN_FLOORS + rand() % MAX_FLOORS;
 
-     /*лифт*/
+     /*лифт дома*/
      if (building.count_floors > MANDATORY_ELEVATOR_FLOORS) {
           building.elevator = true;
      } else if (building.count_floors >= HIGH_FLOORS_THRESHOLD) {
@@ -58,7 +58,7 @@ apartment_building generate_random_building(){
           building.elevator = (rand() % 100 < ODDS20);
      }
 
-    /*мусоропровод*/ 
+    /*мусоропровод дома*/ 
      if (building.year < OLD_YEAR_THRESHOLD) {
           building.garbage_chute = (rand() % 100 < ODDS80);
      }else{
@@ -71,7 +71,7 @@ apartment_building generate_random_building(){
 
      return building;
 }
-/*генерация CVS файла*/
+/*генерация cvs файла*/
 void  generate_rondom_building_cvs(unsigned int count_home, const char *file_name){
      FILE *file_pointer = fopen(file_name, "w");
      if(file_pointer){
