@@ -5,7 +5,7 @@
 vector* vector_create() {
     vector* temp_vector = (vector*)malloc(sizeof(vector));
     if (temp_vector == NULL) {
-        puts("no memory allocated");
+        puts("No memory allocated");
         return NULL;
     }
     size_t initial_capacity = 4;
