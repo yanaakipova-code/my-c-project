@@ -1,10 +1,10 @@
 #pragma once
 #include <stdbool.h>
-
+/*структура*/
 typedef struct{
-    char developer[30];
-    char microdistrict[50];
-    char type[13];
+    char developer[27];
+    char microdistrict[4];
+    char type[12];
     unsigned int year;
     bool elevator;
     bool garbage_chute;
