@@ -53,3 +53,23 @@ apartment_building* vector_back(const vector* vec) {
     }
     return &vec->data[vec->size - 1];
 } 
+
+void vector_expansion(vector* vec) {
+    if (vec == NULL) {
+        return;
+    }
+    size_t new_capacity;
+    if (vec->capacity == 0) {
+        new_capacity = 4;        
+    } else {
+        new_capacity = vec->capacity * 2;  
+    }
+    apartment_building* new_data = (apartment_building*)realloc(
+        vec->data, new_capacity * sizeof(apartment_building));
+    if (new_data == NULL) {
+        puts("Error: memory addition error\n");
+        return;
+    }
+    vec->data = new_data;
+    vec->capacity = new_capacity;
+}
