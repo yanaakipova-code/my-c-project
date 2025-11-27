@@ -2,6 +2,24 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+bool vector_is_valid(const vector* vec) {
+    if (vec == NULL) {
+        return false;
+    }
+    if (vec->data == NULL) {
+        return false;
+    }
+    return true;
+}
+bool vector_is_valid_and_not_empty(const vector* vec) {
+    if (!vector_is_valid(vec)) {
+        return false;
+    }
+    if (vec->size == 0) {
+        return false;
+    }
+    return true;
+}
 vector* vector_create() {
     vector* temp_vector = (vector*)malloc(sizeof(vector));
     if (temp_vector == NULL) {
@@ -72,4 +90,41 @@ void vector_expansion(vector* vec) {
     }
     vec->data = new_data;
     vec->capacity = new_capacity;
+}
+
+void vector_push_back(vector* vec, const apartment_building* value){
+    if (vec == NULL || value == NULL) {
+        return;
+    }
+    if (vec->size >= vec->capacity) {
+        vector_expansion(vec);
+    }
+    size_t temporary = vec->size;
+    vec->data[temporary] = *value;
+    vec->size = temporary + 1;
+}
+
+void vector_push_front(vector* vec, const apartment_building* value){
+    if (vec == NULL || value == NULL) {
+        return;
+    }
+    for (size_t i = vec->size; i > 0; i--) {
+        vec->data[i] = vec->data[i - 1];
+    }
+    vec->data[0] = *value;
+    vec->size++;
+}
+
+void vector_insertion(vector* vec, size_t index, const apartment_building* value){
+    if (vec == NULL || value == NULL || index > vec->size){
+    return;
+    }
+    if (vec->size >= vec->capacity) {
+        vector_expansion(vec);
+    }
+    for (size_t i = vec->size; i > index; i--) {
+    vec->data[i] = vec->data[i - 1];
+    }
+    vec->data[index] = *value;
+    vec->size++;
 }
