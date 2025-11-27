@@ -51,29 +51,32 @@ void vector_destroy(vector* vec) {
     free(vec);    
 }
 size_t vector_size(const vector* vec) {
-    if (vec == NULL) {
-        return 0; 
+    if (!vector_is_valid(vec)){
+        return 0;
     }
     return vec->size;   
 }
 apartment_building* vector_get(const vector* vec, size_t index){
-    if (vec == NULL || index >= vec->size) {
+    if (!vector_is_valid(vec) || index >= vec->size){
         return NULL;
     }    
     return &vec->data[index];
 }
 apartment_building* vector_front(const vector* vec) {
+     if (!vector_is_valid_and_not_empty(vec)){
+        return NULL;
+    }
     return vector_get(vec, 0);
 }
 apartment_building* vector_back(const vector* vec) {
-    if (vec == NULL || vec->size == 0){
+    if  (!vector_is_valid_and_not_empty(vec)){
         return NULL;
     }
     return &vec->data[vec->size - 1];
 } 
 
 void vector_expansion(vector* vec) {
-    if (vec == NULL) {
+    if (!vector_is_valid(vec)) {
         return;
     }
     size_t new_capacity;
@@ -93,7 +96,7 @@ void vector_expansion(vector* vec) {
 }
 
 void vector_push_back(vector* vec, const apartment_building* value){
-    if (vec == NULL || value == NULL) {
+    if (!vector_is_valid(vec) || value == NULL) {
         return;
     }
     if (vec->size >= vec->capacity) {
@@ -105,7 +108,7 @@ void vector_push_back(vector* vec, const apartment_building* value){
 }
 
 void vector_push_front(vector* vec, const apartment_building* value){
-    if (vec == NULL || value == NULL) {
+    if (!vector_is_valid(vec) || value == NULL) {
         return;
     }
     for (size_t i = vec->size; i > 0; i--) {
@@ -116,7 +119,7 @@ void vector_push_front(vector* vec, const apartment_building* value){
 }
 
 void vector_insertion(vector* vec, size_t index, const apartment_building* value){
-    if (vec == NULL || value == NULL || index > vec->size){
+    if (!vector_is_valid(vec) || value == NULL || index > vec->size){
     return;
     }
     if (vec->size >= vec->capacity) {
