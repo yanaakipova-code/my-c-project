@@ -6,6 +6,7 @@ typedef struct{
     size_t size;
     apartment_building* data;
 }vector;
+ 
 bool vector_is_valid(const vector* vec);
 bool vector_is_valid_and_not_empty(const vector* vec);
 
@@ -22,4 +23,4 @@ void vector_expansion(vector* vec);
 
 void vector_push_back(vector* vec, const apartment_building* value);
 void vector_push_front(vector* vec, const apartment_building* value);
-void vector_insert(vector* vec, size_t index, const apartment_building* value);
+void vector_insertion(vector* vec, size_t index, const apartment_building* value);
