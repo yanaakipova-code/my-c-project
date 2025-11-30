@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <string.h> 
 #include <stddef.h> 
 #include "args.h"
 
@@ -16,7 +17,7 @@ for (int i = 1; i < argc; i++) {
         
         if (strcmp(argv[i], "--generate") == 0 || strcmp(argv[i], "-g") == 0) {
             if (args->mode != MODE_ERROR) {
-                printf("Error: Multiple modes specified\n");
+                puts("Error: Multiple modes specified\n");
                 return false;
             }
             if (i + 1 < argc) {
@@ -24,20 +25,24 @@ for (int i = 1; i < argc; i++) {
                 i++;
                 args->generate_count = atoi(argv[i]);
             } else {
-                printf("Error: specify the quantity for --generate\n");
+                puts("Error: specify the quantity for --generate\n");
                 return false;  
             }
         }
+
+
         else if (strcmp(argv[i], "--sort") == 0 || strcmp(argv[i], "-s") == 0) {
             if (args->mode != MODE_ERROR) {
-                printf("Error: Multiple modes specified\n");
+                puts("Error: Multiple modes specified\n");
                 return false;
             }
             args->mode = MODE_SORT;
         }
+
+
         else if (strcmp(argv[i], "--print") == 0 || strcmp(argv[i], "-P") == 0) {
             if (args->mode != MODE_ERROR) {
-                printf("Error: Multiple modes specified\n");
+                puts("Error: Multiple modes specified\n");
                 return false;
             }
             args->mode = MODE_PRINT;
@@ -47,27 +52,52 @@ for (int i = 1; i < argc; i++) {
             if (i+1 < argc){
                 args->output_file = argv[++i];
             }else {
-                printf("Error: -o requires filename\n");
+                puts("Error: -o requires filename\n");
                 return false;
             }
         }
-
-        else if (strcmp(argv[i], "--out=", PASS_ONE) == 0){
+        else if (strncmp(argv[i], "--out=", PASS_ONE) == 0){
             args->output_file = argv[i] + PASS_ONE;
         }
 
-        else if (strcmp(argv[i], "i") == 0){
+
+        else if (strcmp(argv[i], "-i") == 0){
             if (i+1 < argc){
-                args->input_file=argv[i];
+                args->input_file=argv[++i];
             }
             else{
-                printf("Error: -i requires filename\n");
+                puts("Error: -i requires filename\n");
                 return false;
             }
         }
+        else if(strncmp(argv[i], "--in=",PASS_TWO) == 0){
+            args->input_file = argv[i] + PASS_TWO;
+        }
 
-        else if(strcmp(argv[i], "--in=",PASS_TWO) == 0){
-            args->output_file = argv[i] + PASS_TWO;
+
+        else if (strcmp(argv[i], "--type=asc") == 0) {
+            args->order = ORDER_ASC;
+        }
+        else if (strcmp(argv[i], "--type=desc") == 0) {
+            args->order = ORDER_DESC;
+        }
+        else if (strcmp(argv[i], "-t") == 0) {
+            if (i + 1 < argc) {
+                if (strcmp(argv[i + 1], "A") == 0) {
+                    args->order = ORDER_ASC;
+                    i++;
+                }else if (strcmp(argv[i + 1], "D") == 0) {
+                    args->order = ORDER_DESC;
+                    i++;
+                }else{
+                    puts("Error: -t is entered with A (asc) or D (desc)\n");
+                    return false;
+                }
+            }
+            else{
+                    puts("Error: -t is entered with A (asc) or D (desc)\n");
+                    return false;
+                }
         }
         
         else {
