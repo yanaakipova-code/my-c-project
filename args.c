@@ -2,6 +2,8 @@
 #include <stddef.h> 
 #include "args.h"
 
+#define PASS_ONE 6
+
 bool parse_arguments(int argc, char* argv[], ProgramArgs* args){
 args->mode = MODE_ERROR;
 args->order = ORDER_ASC;
@@ -32,7 +34,27 @@ for (int i = 1; i < argc; i++) {
             }
             args->mode = MODE_SORT;
         }
+        else if (strcmp(argv[i], "--print") == 0 || strcmp(argv[i], "-P") == 0) {
+            if (args->mode != MODE_ERROR) {
+                printf("Error: Multiple modes specified\n");
+                return false;
+            }
+            args->mode = MODE_PRINT;
+        }
 
+        else if(strcmp(argv[i], "-o") == 0){
+            if (i+1 < argv){
+                args->output_file = argv[++i];
+            }else {
+                printf("Error: -o requires filename\n");
+                return false;
+            }
+        }
+
+        else if (strcmp(argv[i], "--out=", PASS_ONE) == 0){
+            args->output_file = argv[i] + PASS_ONE;
+        }
+        
         else {
             printf("Error: Unknown argument '%s'\n", argv[i]);
             return false;
