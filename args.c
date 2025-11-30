@@ -37,9 +37,11 @@ for (int i = 1; i < argc; i++) {
             printf("Error: Unknown argument '%s'\n", argv[i]);
             return false;
         }
-
-        
-
-
     }
+    if (args->mode == MODE_ERROR) {
+        printf("Error: No mode selected\n");
+        return false;
+    }
+    
+    return true;
 }
