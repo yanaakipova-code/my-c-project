@@ -25,6 +25,16 @@ for (int i = 1; i < argc; i++) {
                 return false;  
             }
         }
+        else if (strcmp(argv[i], "--sort") == 0 || strcmp(argv[i], "-s") == 0) {
+            if (args->mode != MODE_ERROR) {
+                printf("Error: Multiple modes specified\n");
+                return false;
+            }
+            args->mode = MODE_SORT;
+        }
 
         
+
+
     }
+}
