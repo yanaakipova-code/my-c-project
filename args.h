@@ -16,3 +16,4 @@ typedef struct {
     char* output_file;
     int generate_count;
 } ProgramArgs;
+bool parse_arguments(int argc, char* argv[], ProgramArgs* args);
