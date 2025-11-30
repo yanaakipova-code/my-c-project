@@ -33,6 +33,11 @@ for (int i = 1; i < argc; i++) {
             args->mode = MODE_SORT;
         }
 
+        else {
+            printf("Error: Unknown argument '%s'\n", argv[i]);
+            return false;
+        }
+
         
 
 
