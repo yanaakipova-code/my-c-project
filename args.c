@@ -3,6 +3,7 @@
 #include "args.h"
 
 #define PASS_ONE 6
+#define PASS_TWO 5
 
 bool parse_arguments(int argc, char* argv[], ProgramArgs* args){
 args->mode = MODE_ERROR;
@@ -43,7 +44,7 @@ for (int i = 1; i < argc; i++) {
         }
 
         else if(strcmp(argv[i], "-o") == 0){
-            if (i+1 < argv){
+            if (i+1 < argc){
                 args->output_file = argv[++i];
             }else {
                 printf("Error: -o requires filename\n");
@@ -53,6 +54,20 @@ for (int i = 1; i < argc; i++) {
 
         else if (strcmp(argv[i], "--out=", PASS_ONE) == 0){
             args->output_file = argv[i] + PASS_ONE;
+        }
+
+        else if (strcmp(argv[i], "i") == 0){
+            if (i+1 < argc){
+                args->input_file=argv[i];
+            }
+            else{
+                printf("Error: -i requires filename\n");
+                return false;
+            }
+        }
+
+        else if(strcmp(argv[i], "--in=",PASS_TWO) == 0){
+            args->output_file = argv[i] + PASS_TWO;
         }
         
         else {
