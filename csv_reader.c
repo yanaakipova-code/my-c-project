@@ -2,8 +2,10 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #define FIRST_SIZE 64
 #define ORIGINAL_SIZE 0
+#define FALSE_LETTER 6
 
 static bool parse_bool(const char *str){
     if (strcmp(str, "true") == 0 || strcmp(str, "yes") ==0 || strcmp(str, "1") == 0){
@@ -66,6 +68,46 @@ vector* read_buildings_from_csv(const char * filename){
         vector_destroy(buildings);
         printf("Error: File '%s' is empty\n", filename);
         return NULL;
+    }
+    free(header); 
+    char *line;
+    while ((line = read_line(file)) != NULL){
+        apartment_building building;
+        char elevator_str[FALSE_LETTER];
+        char garbage_chute_str[FALSE_LETTER];
+        int parsed = sscanf(line, "%26[^,],%14[^,],%11[^,],%u,%9[^,],%9[^,],%hu,%hu,%f",
+            building.developer,
+            building.microdistrict,
+            building.type,
+            &building.year,
+            elevator_str,
+            garbage_chute_str,
+            &building.count_apartments,
+            &building.count_floors,
+            &building.area_apartment
+        );
+        if (parsed == 9) {
+            building.elevator = parse_bool(elevator_str);
+            building.garbage_chute = parse_bool(garbage_chute_str);
+            vector_push_back(buildings, &building);
+        }
+        else {
+            printf("Error: couldn't read the line: %s\n", line);
+        }
+        free(line);
+    }
+    fclose(file);
+    if (vector_size(buildings) == 0) {
+        printf("Error: couldn't read file'%s'\n", filename);
+        vector_destroy(buildings);
+        return NULL;
+    }
+    printf("Successfully read %zu records from '%s'\n",vector_size(buildings), filename);
+    return buildings;
+}
+void free_buildings_vector(vector* buildings) {
+    if (buildings != NULL) {
+        vector_destroy(buildings);
     }
 }
 
