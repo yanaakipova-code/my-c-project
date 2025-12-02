@@ -6,7 +6,7 @@
 #define ORIGINAL_SIZE 0
 
 static bool parse_bool(const char *str){
-    if (strcmp(str, "true") || strcmp(str, "yes") || strcmp(str, "1")){
+    if (strcmp(str, "true") == 0 || strcmp(str, "yes") ==0 || strcmp(str, "1") == 0){
         return true;
     }
     else{
@@ -23,8 +23,9 @@ static char *read_line(FILE* file){
     }
      char* line = temp_line;
      int ch;
-     while(ch = fgetc(file) != "/n" && ch != EOF){
+     while(ch = fgetc(file) != "\n" && ch != EOF){
         if (length + 1 >= capacity){
+            capacity *= 2;
             char* temp_line = realloc(line, capacity);
             if (temp_line == NULL){
                 free(line);
@@ -46,6 +47,7 @@ static char *read_line(FILE* file){
     return line;
 }
 
+
 vector* read_buildings_from_csv(const char * filename){
     FILE* file = fopen(filename, "r");
     if (file == NULL){
@@ -56,6 +58,13 @@ vector* read_buildings_from_csv(const char * filename){
     if (buildings == NULL){
         fclose(file);
         puts("Error: couldn't write file");
+        return NULL;
+    }
+    char* header = read_line(file);
+    if (header == 0){
+        fclose(file);
+        vector_destroy(buildings);
+        printf("Error: File '%s' is empty\n", filename);
         return NULL;
     }
 }
