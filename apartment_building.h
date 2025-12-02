@@ -3,7 +3,7 @@
 /*структура*/
 typedef struct{
     char developer[27];
-    char microdistrict[4];
+    char microdistrict[15];
     char type[12];
     unsigned int year;
     bool elevator;
