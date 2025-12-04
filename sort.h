@@ -17,3 +17,5 @@ bool compare_by_developer(const apartment_building* a, const apartment_building*
 bool compare_by_developer_desc(const apartment_building* a, const apartment_building* b);
 bool compare_by_microdistrict(const apartment_building* a, const apartment_building* b);
 bool compare_by_microdistrict_desc(const apartment_building* a, const apartment_building* b);
+bool compare_by_type(const apartment_building* a, const apartment_building* b);
+bool compare_by_type_desc(const apartment_building* a, const apartment_building* b);
