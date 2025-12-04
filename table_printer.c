@@ -193,3 +193,11 @@ void print_buildings_to_file(const vector* buildings, const char* filename) {
     print_buildings_table(buildings, file);
     fclose(file);
 }
+void print_buildings_to_console(const vector* buildings) {
+    if (buildings == NULL) {
+        fprintf(stderr, "Error: Invalid parameter for print_buildings_to_console\n");
+        return;
+    }
+
+    print_buildings_table(buildings, stdout);
+}
