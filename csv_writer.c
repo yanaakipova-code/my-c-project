@@ -36,3 +36,20 @@ void write_buildings_to_stream(const vector* buildings, FILE* stream){
     }
     fflush(stream);
 }
+
+void save_buildings_to_csv(const vector* buildings, const char* filename){
+    if (buildings == NULL || filename == NULL){
+        puts("Errot: Data cannot be recorded\n");
+        return;
+    }
+    FILE* file = fopen(filename, "w");
+     if (file == NULL) {
+        puts("Error: Couldn't open fil");
+        return;
+    }
+    write_buildings_to_stream(buildings, file);
+    fclose(file);
+
+    printf("The data has been successfully written to'%s'\n",filename);
+}
+
