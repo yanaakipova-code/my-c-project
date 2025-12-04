@@ -178,3 +178,18 @@ void print_buildings_table(const vector* buildings, FILE* stream) {
     fprintf(stream, "Total lines: %zu\n", count);
 }
 
+void print_buildings_to_file(const vector* buildings, const char* filename) {
+    if (buildings == NULL || filename == NULL) {
+        fprintf(stderr, "Error: Invalid parameters for print_buildings_to_file\n");
+        return;
+    }
+
+    FILE* file = fopen(filename, "w");
+    if (file == NULL) {
+        fprintf(stderr, "Error: Cannot open file '%s' for writing\n", filename);
+        return;
+    }
+
+    print_buildings_table(buildings, file);
+    fclose(file);
+}
