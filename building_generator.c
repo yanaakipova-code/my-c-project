@@ -1,4 +1,4 @@
-#include "apartment_building.h"
+#include "building_generator.h"
 #include <stdlib.h>
 #include <stdio.h>
 /*площадь квартиры*/
