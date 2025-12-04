@@ -73,3 +73,11 @@ bool compare_by_microdistrict(const apartment_building* a, const apartment_build
 bool compare_by_microdistrict_desc(const apartment_building* a, const apartment_building* b) {
     return strcmp(a->microdistrict, b->microdistrict) > 0;
 }
+
+bool compare_by_type(const apartment_building* a, const apartment_building* b) {
+    return strcmp(a->type, b->type) < 0;
+}
+
+bool compare_by_type_desc(const apartment_building* a, const apartment_building* b) {
+    return strcmp(a->type, b->type) > 0;
+}
