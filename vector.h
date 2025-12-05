@@ -24,3 +24,11 @@ void vector_expansion(vector* vec);
 void vector_push_back(vector* vec, const apartment_building* value);
 void vector_push_front(vector* vec, const apartment_building* value);
 void vector_insertion(vector* vec, size_t index, const apartment_building* value);
+
+apartment_building* vector_next(const vector* vec, const apartment_building* current);
+apartment_building* vector_previous(const vector* vec, const apartment_building* current);
+
+bool vector_removal_back(vector* vec);
+bool vector_removal_front(vector * vec);
+bool vector_erase(vector* vec, size_t index);
+bool vector_swap(vector* vec, size_t i, size_t j);
