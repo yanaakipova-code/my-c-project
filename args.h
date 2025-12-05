@@ -1,4 +1,5 @@
 #pragma once
+#include <stdbool.h>  
 typedef enum{
     MODE_ERROR,
     MODE_GENERATE,
@@ -12,6 +13,7 @@ typedef enum {
 typedef struct {
     ProgramMode mode;
     SortOrder order;
+    char* sort_field; 
     char* input_file;
     char* output_file;
     int generate_count;
