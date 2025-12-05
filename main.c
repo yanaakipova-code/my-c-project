@@ -109,3 +109,42 @@ static int data_generation(const ProgramArgs* args){
 
     return 1;
 }
+
+
+static int data_sort(const ProgramArgs* args){
+    if (args->input_file == NULL) {
+        fprintf(stderr, "Error:\n");
+        return 1;
+    }
+
+    vector* buildings = read_buildings_from_csv(args->input_file);
+    if (buildings == NULL) {
+        fprintf(stderr, "Error: couldn't read data from the file\n");
+        return 1;
+    }
+
+    size_t count = vector_size(buildings);
+    printf("Read %zu bildings\n", count);
+
+    if (count == 0) {
+        fprintf(stderr, "Error: the file does not contain data\n");
+        vector_destroy(buildings);
+        return 1;
+    }
+    Comparator comparator = get_comparator_by_field(args->order, args->sort_field);
+    selection_sort(buildings, comparator);
+
+    if (args->output_file) {
+        if (write_buildings_to_csv(buildings, args->output_file) == NULL) {
+            fprintf(stderr, "Error: Failed to write sorted data to the fileл '%s'\n", args->output_file);
+            vector_destroy(buildings);
+            return 1;
+        }
+        printf("The sorted data is saved to a file: %s\n", args->output_file);
+    } else {
+        puts("Sorted data (CSV format):\n");
+        write_buildings_to_csv_stream(buildings, stdout);
+    }
+    vector_destroy(buildings);
+    return 1;
+}
