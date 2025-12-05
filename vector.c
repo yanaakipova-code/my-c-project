@@ -161,3 +161,11 @@ apartment_building* vector_previous(vector* vec, const apartment_building* value
         return NULL;
     }
 }
+
+bool vector_removal_back(vector* vec){
+    if (!vector_is_valid_and_not_empty(vec)){
+        return false;
+    }
+    vec->size--;
+    return true;
+}
