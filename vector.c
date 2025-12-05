@@ -180,3 +180,14 @@ bool vector_removal_front(vector* vec) {
     vec->size--;
     return true;
 }
+
+bool vector_erase(vector* vec, size_t index) {
+    if (!vec || index >= vec->size){
+        return false;
+    }
+    for (size_t i = index + 1; i < vec->size; i++){
+        vec->data[i-1] = vec->data[i];
+    }
+    vec->size--;
+    return true;
+}
