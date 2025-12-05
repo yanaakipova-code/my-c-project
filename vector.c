@@ -169,3 +169,14 @@ bool vector_removal_back(vector* vec){
     vec->size--;
     return true;
 }
+
+bool vector_removal_front(vector* vec) {
+    if (!vector_is_valid_and_not_empty(vec)){
+        return false;
+    }
+    for (size_t i = 1; i < vec->size; i++){
+        vec->data[i-1] = vec->data[i];
+    }
+    vec->size--;
+    return true;
+}
