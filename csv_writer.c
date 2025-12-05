@@ -13,7 +13,7 @@ static void write_building_csv(const apartment_building* building, FILE* stream)
     if (building == NULL || stream == NULL){
         return ;
     }
-    printf(stream, "%s,%s,%s,%u,%s,%s,%hu,%hu,%.1f\n",
+    fprintf(stream, "%s,%s,%s,%u,%s,%s,%hu,%hu,%.1f\n",
             building->developer,
             building->microdistrict,
             building->type,

@@ -1,6 +1,7 @@
 #include "building_generator.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 /*площадь квартиры*/
 #define MIN_AREA 30.0f 
 #define MAX_AREA 200.0f

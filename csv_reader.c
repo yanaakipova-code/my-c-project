@@ -26,7 +26,7 @@ static char *read_line(FILE* file){
     }
      char* line = temp_line;
      int ch;
-     while(ch = fgetc(file) != "\n" && ch != EOF){
+     while((ch = fgetc(file)) != '\n' && ch != EOF){
         if (length + 1 >= capacity){
             capacity *= 2;
             char* temp_line = realloc(line, capacity);

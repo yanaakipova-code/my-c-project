@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 static Comparator get_comparator_by_field(SortOrder order, const char* field_name){
     
@@ -95,15 +96,11 @@ static int data_generation(const ProgramArgs* args){
     }
 
     if (args->output_file) {
-        if (write_buildings_to_csv(buildings, args->output_file) == NULL) {
-            fprintf(stderr, "Error: Failed to write data to the file '%s'\n", args->output_file);
-            vector_destroy(buildings);
-            return 1;
-        }
+        save_buildings_to_csv(buildings, args->output_file);
         printf("The data has been successfully saved to a file: %s\n", args->output_file);
     } else {
         puts("Generated data (CSV format):\n");
-        write_buildings_to_csv_stream(buildings, stdout);
+        write_buildings_to_stream(buildings, stdout);
     }
     vector_destroy(buildings);
 
@@ -135,15 +132,11 @@ static int data_sort(const ProgramArgs* args){
     selection_sort(buildings, comparator);
 
     if (args->output_file) {
-        if (write_buildings_to_csv(buildings, args->output_file) == NULL) {
-            fprintf(stderr, "Error: Failed to write sorted data to the fileл '%s'\n", args->output_file);
-            vector_destroy(buildings);
-            return 1;
-        }
+        save_buildings_to_csv(buildings, args->output_file);
         printf("The sorted data is saved to a file: %s\n", args->output_file);
     } else {
         puts("Sorted data (CSV format):\n");
-        write_buildings_to_csv_stream(buildings, stdout);
+        write_buildings_to_stream(buildings, stdout);
     }
     vector_destroy(buildings);
     return 1;
@@ -183,7 +176,6 @@ int main(int argc, char* argv[]){
     srand(time(NULL));
     ProgramArgs args;
     if (!parse_arguments(argc, argv, &args)) {
-        print_help(argv[0]);
         fprintf(stderr, "Error: incorrect command line arguments\n");
         return 1;
     }
