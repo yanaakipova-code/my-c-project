@@ -191,3 +191,15 @@ bool vector_erase(vector* vec, size_t index) {
     vec->size--;
     return true;
 }
+
+bool vector_swap(vector* vec, size_t i, size_t j){
+    if (!vec || i >= vec->size || j >= vec->size){
+        return false;
+    }
+    if (i == j) return true;
+    apartment_building temp = vec->data[i];
+    vec->data[i] = vec->data[j];
+    vec->data[j] = temp;
+    return true;
+}
+
