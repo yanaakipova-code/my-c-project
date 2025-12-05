@@ -151,9 +151,13 @@ static int data_sort(const ProgramArgs* args){
 
 
 static int dprint_data(const ProgramArgs* args) {
-    vector* buildings = read_buildings_from_csv(args->input_file);
     if (args->input_file == NULL) {
-        fprintf(stderr, "Error: an input file is required to display the table\n");
+        fprintf(stderr, "Error: there is no input file\n");
+        return 1;
+    }
+    vector* buildings = read_buildings_from_csv(args->input_file);
+    if (buildings == NULL) {
+        fprintf(stderr, "Error: the data has not been read '%s'\n", args->input_file);
         return 1;
     }
 
