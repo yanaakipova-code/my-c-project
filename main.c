@@ -175,4 +175,12 @@ static int dprint_data(const ProgramArgs* args) {
     return 1;
 }
 
-
+int main(int argc, char* argv[]){
+    srand(time(NULL));
+    ProgramArgs args;
+    if (!parse_arguments(argc, argv, &args)) {
+        print_help(argv[0]);
+        fprintf(stderr, "Error: incorrect command line arguments\n");
+        return 1;
+    }
+}
