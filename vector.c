@@ -146,3 +146,18 @@ apartment_building *vector_next(vector* vec,  const apartment_building* value){
         return NULL;
     }
 }
+
+apartment_building* vector_previous(vector* vec, const apartment_building* value){
+    if (!vector_is_valid(vec) || value == NULL ){
+        return NULL;
+    }
+    size_t index = value - vec->data;
+    if (index >= vec->size) {
+        return NULL;
+    }
+    if (index > 0) {
+        return &vec->data[index - 1];
+    } else {
+        return NULL;
+    }
+}
