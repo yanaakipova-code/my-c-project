@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h> 
 #include <stdlib.h>
 #define FIRST_SIZE 64
 #define ORIGINAL_SIZE 0
