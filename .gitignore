@@ -1,0 +1,12 @@
+# Compiled C files 
+*.o 
+*.exe 
+*.obj 
+ 
+# Test data 
+test.csv 
+*.csv 
+ 
+# Temporary files 
+*~ 
+"*.c~" 
