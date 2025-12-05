@@ -1,6 +1,8 @@
 #include <stdbool.h>
 #include <string.h> 
 #include <stddef.h> 
+#include <stdio.h>
+#include <stdlib.h>
 #include "args.h"
 
 #define PASS_ONE 6
