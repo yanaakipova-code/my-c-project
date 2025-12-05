@@ -96,13 +96,13 @@ static int data_generation(const ProgramArgs* args){
 
     if (args->output_file) {
         if (write_buildings_to_csv(buildings, args->output_file) == NULL) {
-            fprintf(stderr, "Ошибка: не удалось записать данные в файл '%s'\n", args->output_file);
+            fprintf(stderr, "Error: Failed to write data to the file '%s'\n", args->output_file);
             vector_destroy(buildings);
             return 1;
         }
-        printf("Данные успешно сохранены в файл: %s\n", args->output_file);
+        printf("The data has been successfully saved to a file: %s\n", args->output_file);
     } else {
-        puts("Сгенерированные данные (CSV формат):\n");
+        puts("Generated data (CSV format):\n");
         write_buildings_to_csv_stream(buildings, stdout);
     }
     vector_destroy(buildings);
