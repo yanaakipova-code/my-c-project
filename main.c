@@ -183,4 +183,15 @@ int main(int argc, char* argv[]){
         fprintf(stderr, "Error: incorrect command line arguments\n");
         return 1;
     }
+    switch (args.mode) {
+    case MODE_GENERATE:
+        return data_generation(&args);
+    case MODE_SORT:
+        return data_sort(&args);
+    case MODE_PRINT:
+        return dprint_data(&args);
+    default:
+        return 1;
+        fprintf(stderr, "Error: The program is broken\n");
+    }
 }
