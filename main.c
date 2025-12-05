@@ -148,3 +148,31 @@ static int data_sort(const ProgramArgs* args){
     vector_destroy(buildings);
     return 1;
 }
+
+
+static int dprint_data(const ProgramArgs* args) {
+    vector* buildings = read_buildings_from_csv(args->input_file);
+    if (args->input_file == NULL) {
+        fprintf(stderr, "Error: an input file is required to display the table\n");
+        return 1;
+    }
+
+    size_t count = vector_size(buildings);
+    printf("Read it %zu buildings\n", count);
+
+    if (count == 0) {
+        fprintf(stderr, "Error: the file does not contain data\n");
+        vector_destroy(buildings);
+        return 1;
+    }
+
+    if (args->output_file) {
+        print_buildings_to_file(buildings, args->output_file);
+    } else {
+        print_buildings_to_console(buildings);
+    }
+    vector_destroy(buildings);
+    return 1;
+}
+
+
