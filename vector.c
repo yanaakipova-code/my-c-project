@@ -120,14 +120,29 @@ void vector_push_front(vector* vec, const apartment_building* value){
 
 void vector_insertion(vector* vec, size_t index, const apartment_building* value){
     if (!vector_is_valid(vec) || value == NULL || index > vec->size){
-    return;
+        return;
     }
-    if (vec->size >= vec->capacity) {
+    if (vec->size > vec->capacity) {
         vector_expansion(vec);
     }
     for (size_t i = vec->size; i > index; i--) {
-    vec->data[i] = vec->data[i - 1];
+        vec->data[i] = vec->data[i - 1];
     }
     vec->data[index] = *value;
     vec->size++;
+}
+
+apartment_building *vector_next(vector* vec,  const apartment_building* value){
+    if (!vector_is_valid(vec) || value == NULL) {
+        return NULL;
+    }
+    size_t index= value - vec->size;
+    if (index == NULL){
+        return NULL;
+    }
+    if (index + 1 < vec->size) {
+        return &vec->data[index + 1];
+    }else{
+        return NULL;
+    }
 }
