@@ -132,12 +132,12 @@ void vector_insertion(vector* vec, size_t index, const apartment_building* value
     vec->size++;
 }
 
-apartment_building *vector_next(vector* vec,  const apartment_building* value){
+apartment_building* vector_next(const vector* vec,  const apartment_building* value){
     if (!vector_is_valid(vec) || value == NULL) {
         return NULL;
     }
-    size_t index= value - vec->size;
-    if (index == NULL){
+    size_t index= value - vec->data;
+    if (value < vec->data || value >= vec->data + vec->size){
         return NULL;
     }
     if (index + 1 < vec->size) {
@@ -147,7 +147,7 @@ apartment_building *vector_next(vector* vec,  const apartment_building* value){
     }
 }
 
-apartment_building* vector_previous(vector* vec, const apartment_building* value){
+apartment_building* vector_previous(const vector* vec, const apartment_building* value){
     if (!vector_is_valid(vec) || value == NULL ){
         return NULL;
     }
