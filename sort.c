@@ -1,5 +1,41 @@
 #include "sort.h"
 #include <string.h>
+
+int comporator_increasing(const apartment_building *a, const apartment_building *b){
+    if (a->year != b->year)
+    if(a->year < b->year) return -1;
+    if(a->year > b->year)  return 1;
+
+    if (a->count_floors < b->count_floors) return -1;
+    if (a->count_floors > b->count_floors) return 1;
+
+    if (a->count_apartments < b->count_apartments) return -1;
+    if (a->count_apartments > b->count_apartments) return 1;
+
+    if (a->area_apartment < b->area_apartment) return -1;
+    if (a->area_apartment > b->area_apartment) return 1;
+
+    int cmp = strcmp(a->microdistrict, b->microdistrict);
+    if (cmp < 0) return -1;
+    if (cmp > 0) return 1;
+
+    int cmp = strcmp(a->type, b->type);
+    if (cmp < 0) return -1;
+    if (cmp > 0) return 1;
+
+    if (a->elevator < b->elevator) return -1;    
+    if (a->elevator > b->elevator) return 1;
+
+    int cmp = strcmp(a->developer, b->developer);
+    if (cmp < 0) return -1;
+    if (cmp > 0) return 1;
+
+    if (a->garbage_chute < b->garbage_chute) return -1;
+    if (a->garbage_chute > b->garbage_chute) return 1;
+
+        return 0;
+}
+
 void selection_sort(vector* vec, Comparator comp) {
     if (!vector_is_valid_and_not_empty(vec)) {
         return;
