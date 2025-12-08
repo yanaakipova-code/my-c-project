@@ -1,7 +1,7 @@
 #include "sort.h"
 #include <string.h>
 
-int comporator_increasing(const apartment_building *a, const apartment_building *b){
+int comparator_by_ascending(const apartment_building *a, const apartment_building *b){
     if (a->year != b->year)
     if(a->year < b->year) return -1;
     if(a->year > b->year)  return 1;
@@ -34,6 +34,10 @@ int comporator_increasing(const apartment_building *a, const apartment_building 
     if (a->garbage_chute > b->garbage_chute) return 1;
 
         return 0;
+}
+int comporator_reduction(apartment_building *a, apartment_building *b){
+    int res = comparator_by_ascending(a,b);
+    return -res;
 }
 
 void selection_sort(vector* vec, Comparator comp) {
