@@ -15,67 +15,16 @@
 static Comparator get_comparator_by_field(SortOrder order, const char* field_name){
     
     if (field_name == NULL){
-        if (order == ORDER_ASC){
-            return compare_by_year;
-        }else{
-            return compare_by_year_desc;
+        if (order == ORDER_ASC) {
+            return comparator_by_ascending;
+        } else {
+            return comporator_reductionconst;
         }
     }
-
-     if (strcmp(field_name, "developer") == 0) {
-        if (order == ORDER_ASC) {
-            return compare_by_developer;
-        } else {
-            return compare_by_developer_desc;
-        }
-    }
-
-    if (strcmp(field_name, "microdistrict") == 0) {
-        if (order == ORDER_ASC) {
-            return compare_by_microdistrict;
-        } else {
-            return compare_by_microdistrict_desc;
-        }
-    }
-
-    if (strcmp(field_name, "year") == 0) {
-        if (order == ORDER_ASC) {
-            return compare_by_year;
-        } else {
-            return compare_by_year_desc;
-        }
-    }
-
-    if (strcmp(field_name, "apartments") == 0) {
-        if (order == ORDER_ASC) {
-            return compare_by_apartments;
-        } else {
-            return compare_by_apartments_desc;
-        }
-    }
-
-    if (strcmp(field_name, "floors") == 0) {
-        if (order == ORDER_ASC) {
-            return compare_by_floors;
-        } else {
-            return compare_by_floors_desc;
-        }
-    }
-
-    if (strcmp(field_name, "area") == 0) {
-        if (order == ORDER_ASC) {
-            return compare_by_area;
-        } else {
-            return compare_by_area_desc;
-        }
-    }
-
-    if (strcmp(field_name, "type") == 0) {
-        if (order == ORDER_ASC) {
-            return compare_by_type;
-        } else {
-            return compare_by_type_desc;
-        }
+    if (order == ORDER_ASC) {
+        return comparator_by_ascending;
+    } else {
+        return comporator_reductionconst;
     }
 }
 
