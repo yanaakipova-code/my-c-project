@@ -1,4 +1,5 @@
 #include "sort.h"
+#include "vector.h"
 #include <string.h>
 
 int comparator_by_ascending(const apartment_building *a, const apartment_building *b){
@@ -59,9 +60,7 @@ void selection_sort(vector* vec, Comparator comp) {
             }
         }
         if (min_index != i) {
-            apartment_building temp = *vector_get(vec, i);
-            *vector_get(vec, i) = *vector_get(vec, min_index);
-            *vector_get(vec, min_index) = temp;          
+            vector_swap(vec, i, min_index);
         }
     }
 
