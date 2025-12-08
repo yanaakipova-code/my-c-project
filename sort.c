@@ -54,7 +54,7 @@ void selection_sort(vector* vec, Comparator comp) {
             apartment_building* current = vector_get(vec, j);
             apartment_building* min = vector_get(vec, min_index);
     
-            if (comp(current, min)) {
+            if (comp(current, min) < 0) {
                 min_index = j;
             }
         }
