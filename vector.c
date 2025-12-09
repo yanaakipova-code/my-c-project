@@ -23,7 +23,7 @@ bool vector_is_valid_and_not_empty(const vector* vec) {
 vector* vector_create() {
     vector* temp_vector = (vector*)malloc(sizeof(vector));
     if (temp_vector == NULL) {
-        puts("No memory allocated");
+        puts("Память не выделена ");
         return NULL;
     }
     size_t initial_capacity = 4;
@@ -31,7 +31,7 @@ vector* vector_create() {
         initial_capacity * sizeof(apartment_building)
     );
     if (temp_vector->data == NULL) {
-        puts("no memory allocated");
+        puts("Память не выделена");
         free(temp_vector);
         return NULL;
     }
