@@ -2,6 +2,31 @@
 #include "apartment_building.h"
 #include <stdio.h>
 
+static void print_horizontal_line(FILE* stream, 
+                                 int col_dev, int col_micro, int col_type,
+                                 int col_year, int col_elev, int col_garb,
+                                 int col_apt, int col_floors, int col_area) {
+    fprintf(stream, "+");
+    for (int i = 0; i < col_dev + 2; i++) fputc('-', stream);
+    fprintf(stream, "+");
+    for (int i = 0; i < col_micro + 2; i++) fputc('-', stream);
+    fprintf(stream, "+");
+    for (int i = 0; i < col_type + 2; i++) fputc('-', stream);
+    fprintf(stream, "+");
+    for (int i = 0; i < col_year + 2; i++) fputc('-', stream);
+    fprintf(stream, "+");
+    for (int i = 0; i < col_elev + 2; i++) fputc('-', stream);
+    fprintf(stream, "+");
+    for (int i = 0; i < col_garb + 2; i++) fputc('-', stream);
+    fprintf(stream, "+");
+    for (int i = 0; i < col_apt + 2; i++) fputc('-', stream);
+    fprintf(stream, "+");
+    for (int i = 0; i < col_floors + 2; i++) fputc('-', stream);
+    fprintf(stream, "+");
+    for (int i = 0; i < col_area + 2; i++) fputc('-', stream);
+    fprintf(stream, "+\n");
+}
+
 void print_buildings_table(const vector* buildings, FILE* stream) {
     if (buildings == NULL || stream == NULL) {
         return;
@@ -19,44 +44,8 @@ void print_buildings_table(const vector* buildings, FILE* stream) {
     const int col_floors = 10;
     const int col_area = 15;
 
-    fprintf(stream, "+");
-    for (int i = 0; i < col_dev + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_micro + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_type + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_year + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_elev + 2; i++) {
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_garb + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_apt + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_floors + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_area + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+\n");
-
+    print_horizontal_line(stream, col_dev, col_micro, col_type, col_year,
+        col_elev, col_garb, col_apt, col_floors, col_area);
 
     fprintf(stream, "| %-*s | %-*s | %-*s | %-*s | %-*s | %-*s | %-*s | %-*s | %-*s |\n",
             col_dev, "Developer",
@@ -68,45 +57,8 @@ void print_buildings_table(const vector* buildings, FILE* stream) {
             col_apt, "Apartments",
             col_floors, "Floors",
             col_area, "Area (m²)");
-
-
-    fprintf(stream, "+");
-    for (int i = 0; i < col_dev + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_micro + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_type + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_year + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_elev + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_garb + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_apt + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_floors + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_area + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+\n");
+    print_horizontal_line(stream, col_dev, col_micro, col_type, col_year,
+                         col_elev, col_garb, col_apt, col_floors, col_area);
 
     for (size_t i = 0; i < count; i++) {
         const apartment_building* b = vector_get(buildings, i);
@@ -137,47 +89,13 @@ void print_buildings_table(const vector* buildings, FILE* stream) {
                     col_area, b->area_apartment);
         }
     }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_dev + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_micro + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_type + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_year + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_elev + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_garb + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_apt + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_floors + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+");
-    for (int i = 0; i < col_area + 2; i++){
-        fprintf(stream, "-");
-    }
-    fprintf(stream, "+\n");
 
-    fprintf(stream, "Общее количество строк: %zu\n", count);
+    if (count > 0) {
+        print_horizontal_line(stream, col_dev, col_micro, col_type, col_year,
+            col_elev, col_garb, col_apt, col_floors, col_area);
+    }
 }
-
+    
 void print_buildings_to_file(const vector* buildings, const char* filename) {
     if (buildings == NULL || filename == NULL) {
         fprintf(stderr, "Ошибка: Неверные параметры\n");
@@ -186,7 +104,7 @@ void print_buildings_to_file(const vector* buildings, const char* filename) {
 
     FILE* file = fopen(filename, "w");
     if (file == NULL) {
-        fprintf(stderr, "Ошибка: Не удается открыть файл %s для записи\n", filename);
+        fprintf(stderr, "Ошибка:Не удается открыть файл %s для записи\n", filename);
         return;
     }
 
