@@ -24,12 +24,14 @@
 #define MAX_APARTMENTS_PER_FLOOR 12
 #define OLD_YEAR_THRESHOLD 2000
 
-static const char* developers[] = {"ПИК", "Левл", "Стрижи",
-     "Символ", "Пифогор", "Город"};
-static const char* microdistricts[] = {"Центральный", "Северный", "Южный",
-     "Таганский", "Тверской", "Замоскворечье", "Академический"};
+static const char* developers[] = {"PIK", "Level", "Strizhi",
+     "Simvol", "Pifagor", "Gorod"};
+     
+static const char* microdistricts[] = {"Central", "North", "South",
+     "Tagansky", "Tverskoy", "Zamoskvorechye", "Academic"};
+     
 static const char* building_types[] = {
-    "Панельный", "Кирпичный", "Монолитный"};
+    "Panel", "Brick", "Monolith"};
 
 /*генерация случайного дома*/
 apartment_building generate_random_building(){

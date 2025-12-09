@@ -9,8 +9,8 @@ clean:
 main.o: main.c
 	gcc -c -o main.o main.c
 
-args.o: args.c args.h
-	gcc -c -o args.o args.c
+args_parser.o: args_parser.c args_parser.h
+	gcc -c -o args_parser.o args_parser.c
 
 vector.o: vector.c vector.h apartment_building.h
 	gcc -c -o vector.o vector.c
@@ -30,6 +30,6 @@ building_generator.o: building_generator.c building_generator.h apartment_buildi
 table_printer.o: table_printer.c table_printer.h vector.h apartment_building.h
 	gcc -c -o table_printer.o table_printer.c
 
-$(TARGET): main.o args.o vector.o sort.o csv_reader.o csv_writer.o building_generator.o table_printer.o
-	gcc -o $(TARGET) main.o args.o vector.o sort.o csv_reader.o csv_writer.o building_generator.o table_printer.o
+$(TARGET): main.o args_parser.o vector.o sort.o csv_reader.o csv_writer.o building_generator.o table_printer.o
+	gcc -o $(TARGET) main.o args_parser.o vector.o sort.o csv_reader.o csv_writer.o building_generator.o table_printer.o
 
