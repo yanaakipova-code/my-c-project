@@ -14,17 +14,13 @@
 
 static Comparator get_comparator_by_field(SortOrder order, const char* field_name){
     
-    if (field_name == NULL){
-        if (order == ORDER_ASC) {
-            return comparator_by_ascending;
-        } else {
-            return comporator_reductionconst;
-        }
+    if (field_name != NULL) {
+        fprintf(stderr, "Warning: Sorting by field '%s' is not supported. Using universal comparator\n");
     }
     if (order == ORDER_ASC) {
         return comparator_by_ascending;
     } else {
-        return comporator_reductionconst;
+        return comporator_reduction;
     }
 }
 
@@ -92,7 +88,7 @@ static int data_sort(const ProgramArgs* args){
 }
 
 
-static int dprint_data(const ProgramArgs* args) {
+static int print_data(const ProgramArgs* args) {
     if (args->input_file == NULL) {
         fprintf(stderr, "Error: there is no input file\n");
         return 1;
@@ -134,7 +130,7 @@ int main(int argc, char* argv[]){
     case MODE_SORT:
         return data_sort(&args);
     case MODE_PRINT:
-        return dprint_data(&args);
+        return print_data(&args);
     default:
         return 1;
         fprintf(stderr, "Error: The program is broken\n");
