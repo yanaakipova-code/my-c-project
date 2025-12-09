@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #define FIRST_SIZE 64
 #define ORIGINAL_SIZE 0
-#define FALSE_LETTER 6
+#define MAX_LETTER 6
 
 static bool parse_bool(const char *str){
     if (strcmp(str, "true") == 0 || strcmp(str, "yes") ==0 || strcmp(str, "1") == 0){
@@ -74,9 +74,9 @@ vector* read_buildings_from_csv(const char * filename){
     char *line;
     while ((line = read_line(file)) != NULL){
         apartment_building building;
-        char elevator_str[FALSE_LETTER];
-        char garbage_chute_str[FALSE_LETTER];
-        int parsed = sscanf(line, "%26[^,],%14[^,],%11[^,],%u,%9[^,],%9[^,],%hu,%hu,%f",
+        char elevator_str[MAX_LETTER];
+        char garbage_chute_str[MAX_LETTER];
+        int parsed = sscanf(line, "%26[^,],%14[^,],%11[^,],%u,%7[^,],%7[^,],%hu,%hu,%f",
             building.developer,
             building.microdistrict,
             building.type,
