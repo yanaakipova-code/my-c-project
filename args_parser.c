@@ -30,33 +30,39 @@ args->input_file = NULL;
 args->output_file = NULL;
 args->generate_count = 0;
 
+if (argc == 1){
+    print_help(argv[0]);
+    return false;
+}
+
 for (int i = 1; i < argc; i++) {
-        
+        const char* arg = argv[1];
         if (strcmp(argv[i], "--generate") == 0 || strcmp(argv[i], "-g") == 0) {
-            if (args->mode != MODE_ERROR) {
+            if (args->mode != MODE_ERROR && args->mode != MODE_GENERATE) {
                 puts("Ошибка: задано несколько режимов\n");
                 return false;
             }
+            args->mode = MODE_GENERATE;
+
             if (i + 1 < argc) {
-                args->mode = MODE_GENERATE;
-                i++;
-                args->generate_count = atoi(argv[i]);
+                args->generate_count = atoi(argv[i++]);
+                if (args->generate_count <= 0){
+                    fprintf(stderr, "ошибка, число должно быть положительным");
+                }
             } else {
                 puts("Ошибка: укажите количество для --generate\n");
                 return false;  
             }
         }
         else if (strcmp(argv[i], "--sort") == 0 || strcmp(argv[i], "-s") == 0) {
-            if (args->mode != MODE_ERROR) {
+            if (args->mode != MODE_ERROR && args->mode != MODE_SORT) {
                 puts("Ошибка: задано несколько режимов\n");
                 return false;
             }
             args->mode = MODE_SORT;
         }
-
-
         else if (strcmp(argv[i], "--print") == 0 || strcmp(argv[i], "-P") == 0) {
-            if (args->mode != MODE_ERROR) {
+            if (args->mode != MODE_ERROR && args->mode != MODE_PRINT) {
                 puts("Ошибка: задано несколько режимов\n");
                 return false;
             }
@@ -90,41 +96,21 @@ for (int i = 1; i < argc; i++) {
         }
 
 
-        else if (strcmp(argv[i], "--type=asc") == 0) {
+        else if (strcmp(argv[i], "--type=asc") == 0 || strcmp(argv[i], "-t") == 0 \
+                    && i + 1 < argc && strcmp(argv[i], "A") == 0 || strcmp(argv[i], "asc") == 0 ) {
             args->order = ORDER_ASC;
+            if (strcmp(argv[i], "-t") == 0) i++;
         }
-        else if (strcmp(argv[i], "--type=desc") == 0) {
+        else if (strcmp(arg, "--type=desc") == 0 || \
+                    (strcmp(arg, "-t") == 0 && i + 1 < argc && 
+                        (strcmp(argv[i+1], "D") == 0 || strcmp(argv[i+1], "desc") == 0))) {
             args->order = ORDER_DESC;
+            if (strcmp(arg, "-t") == 0) i++;
         }
-        else if (strcmp(argv[i], "-t") == 0) {
-            if (i + 1 < argc) {
-                if (strcmp(argv[i + 1], "A") == 0) {
-                    args->order = ORDER_ASC;
-                    i++;
-                }else if (strcmp(argv[i + 1], "D") == 0) {
-                    args->order = ORDER_DESC;
-                    i++;
-                }else{
-                    puts("Ошибка: -t вводится через A (asc) или D (desc)\n");
-                    return false;
-                }
-            }
-            else{
-                    puts("Ошибка: -t вводится через A (asc) или D (desc))\n");
-                    return false;
-                }
+        else{
+            fprint(stderr, "Ошибка: неизвестный аргумент");
         }
-        else if (strncmp(argv[i], "--field=", 8) == 0) {
-            args->sort_field = argv[i] + 8;
-        }
-        else if (strcmp(argv[i], "-f") == 0 && i + 1 < argc) {
-            args->sort_field = argv[++i];
-        }
-        else {
-            printf("Ошибка: Неизвестный аргумент '%s'\n", argv[i]);
-            return false;
-        }
-    }
+
     if (args->mode == MODE_ERROR) {
         printf("Ошибка: Режим не выбран\n");
         return false;
