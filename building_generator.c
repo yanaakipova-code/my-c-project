@@ -24,12 +24,12 @@
 #define MAX_APARTMENTS_PER_FLOOR 12
 #define OLD_YEAR_THRESHOLD 2000
 
-static const char* developers[] = {"PEAK", "plane", "swifts",
-     "level", "symbol", "city"};
-static const char* microdistricts[] = {"Central", "South", "Northern",
-     "Tagansky", "Tverskoy", "Zamoskvorechye", "Academic"};
+static const char* developers[] = {"ПИК", "Левл", "Стрижи",
+     "Символ", "Пифогор", "Город"};
+static const char* microdistricts[] = {"Центральный", "Северный", "Южный",
+     "Таганский", "Тверской", "Замоскворечье", "Академический"};
 static const char* building_types[] = {
-    "panel", "brick", "monolithic"};
+    "Панельный", "Кирпичный", "Монолитный"};
 
 /*генерация случайного дома*/
 apartment_building generate_random_building(){
@@ -76,7 +76,8 @@ apartment_building generate_random_building(){
 void  generate_rondom_building_cvs(unsigned int count_home, const char *file_name){
      FILE *file_pointer = fopen(file_name, "w");
      if(file_pointer){
-          fputs("dev,district,type,year,elev,chute,apts,flrs,area\n", file_pointer);
+          fputs("Название застройщика, Название микрорайона, Тип, Год постройки, \
+               Наличие лифта, Количество квартир, Количество этажей,Средняя площадь квартиры\n", file_pointer);
           for(unsigned int i = 0; i < count_home; i++) {
             apartment_building building = generate_random_building();
             

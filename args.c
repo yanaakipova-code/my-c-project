@@ -20,7 +20,7 @@ for (int i = 1; i < argc; i++) {
         
         if (strcmp(argv[i], "--generate") == 0 || strcmp(argv[i], "-g") == 0) {
             if (args->mode != MODE_ERROR) {
-                puts("Error: Multiple modes specified\n");
+                puts("Ошибка: задано несколько режимов\n");
                 return false;
             }
             if (i + 1 < argc) {
@@ -28,13 +28,13 @@ for (int i = 1; i < argc; i++) {
                 i++;
                 args->generate_count = atoi(argv[i]);
             } else {
-                puts("Error: specify the quantity for --generate\n");
+                puts("Ошибка: укажите количество для --generate\n");
                 return false;  
             }
         }
         else if (strcmp(argv[i], "--sort") == 0 || strcmp(argv[i], "-s") == 0) {
             if (args->mode != MODE_ERROR) {
-                puts("Error: Multiple modes specified\n");
+                puts("Ошибка: задано несколько режимов\n");
                 return false;
             }
             args->mode = MODE_SORT;
@@ -43,7 +43,7 @@ for (int i = 1; i < argc; i++) {
 
         else if (strcmp(argv[i], "--print") == 0 || strcmp(argv[i], "-P") == 0) {
             if (args->mode != MODE_ERROR) {
-                puts("Error: Multiple modes specified\n");
+                puts("Ошибка: задано несколько режимов\n");
                 return false;
             }
             args->mode = MODE_PRINT;
@@ -53,7 +53,7 @@ for (int i = 1; i < argc; i++) {
             if (i+1 < argc){
                 args->output_file = argv[++i];
             }else {
-                puts("Error: -o requires filename\n");
+                puts("Ошибка: -o требуется имя файла\n");
                 return false;
             }
         }
@@ -67,7 +67,7 @@ for (int i = 1; i < argc; i++) {
                 args->input_file=argv[++i];
             }
             else{
-                puts("Error: -i requires filename\n");
+                puts("Ошибка: -i требуется имя файла\n");
                 return false;
             }
         }
@@ -91,12 +91,12 @@ for (int i = 1; i < argc; i++) {
                     args->order = ORDER_DESC;
                     i++;
                 }else{
-                    puts("Error: -t is entered with A (asc) or D (desc)\n");
+                    puts("Ошибка: -t вводится через A (asc) или D (desc)\n");
                     return false;
                 }
             }
             else{
-                    puts("Error: -t is entered with A (asc) or D (desc)\n");
+                    puts("Ошибка: -t вводится через A (asc) или D (desc))\n");
                     return false;
                 }
         }
@@ -107,12 +107,12 @@ for (int i = 1; i < argc; i++) {
             args->sort_field = argv[++i];
         }
         else {
-            printf("Error: Unknown argument '%s'\n", argv[i]);
+            printf("Ошибка: Неизвестный аргумент '%s'\n", argv[i]);
             return false;
         }
     }
     if (args->mode == MODE_ERROR) {
-        printf("Error: No mode selected\n");
+        printf("Ошибка: Режим не выбран\n");
         return false;
     }
     

@@ -175,18 +175,18 @@ void print_buildings_table(const vector* buildings, FILE* stream) {
     }
     fprintf(stream, "+\n");
 
-    fprintf(stream, "Total lines: %zu\n", count);
+    fprintf(stream, "Общее количество строк: %zu\n", count);
 }
 
 void print_buildings_to_file(const vector* buildings, const char* filename) {
     if (buildings == NULL || filename == NULL) {
-        fprintf(stderr, "Error: Invalid parameters for print_buildings_to_file\n");
+        fprintf(stderr, "Ошибка: Неверные параметры\n");
         return;
     }
 
     FILE* file = fopen(filename, "w");
     if (file == NULL) {
-        fprintf(stderr, "Error: Cannot open file '%s' for writing\n", filename);
+        fprintf(stderr, "Ошибка: Не удается открыть файл %s для записи\n", filename);
         return;
     }
 
@@ -196,7 +196,7 @@ void print_buildings_to_file(const vector* buildings, const char* filename) {
 
 void print_buildings_to_console(const vector* buildings) {
     if (buildings == NULL) {
-        fprintf(stderr, "Error: Invalid parameter for print_buildings_to_console\n");
+        fprintf(stderr, "Ошибка: Неверный параметр\n");
         return;
     }
 

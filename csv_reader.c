@@ -21,7 +21,7 @@ static char *read_line(FILE* file){
     size_t length = ORIGINAL_SIZE;
     char* temp_line = malloc(capacity * sizeof(char));
     if (temp_line == NULL){
-        puts("Error: Memory is not allocated");
+        puts("Ошибка: Память не выделена");
         return NULL;
     }
      char* line = temp_line;
@@ -32,7 +32,7 @@ static char *read_line(FILE* file){
             char* temp_line = realloc(line, capacity);
             if (temp_line == NULL){
                 free(line);
-                puts("Erorr: the space has not increased");
+                puts("Ошибка: память не увеличилось");
                 return NULL;
             }
             line = temp_line;
@@ -54,20 +54,20 @@ static char *read_line(FILE* file){
 vector* read_buildings_from_csv(const char * filename){
     FILE* file = fopen(filename, "r");
     if (file == NULL){
-        printf("Error: file: %s couldn't be opened", filename);
+        printf("Ошибка: файл: %s не удалось открыть", filename);
         return NULL;
     }
     vector* buildings = vector_create();
     if (buildings == NULL){
         fclose(file);
-        puts("Error: couldn't write file");
+        puts("Ошибка: не удалось записать файл");
         return NULL;
     }
     char* header = read_line(file);
     if (header == 0){
         fclose(file);
         vector_destroy(buildings);
-        printf("Error: File '%s' is empty\n", filename);
+        printf("Ошибка: файл %s пуст\n", filename);
         return NULL;
     }
     free(header); 
@@ -93,17 +93,17 @@ vector* read_buildings_from_csv(const char * filename){
             vector_push_back(buildings, &building);
         }
         else {
-            printf("Error: couldn't read the line: %s\n", line);
+            printf("Ошибка: не удалось прочитать строку: %s\n", line);
         }
         free(line);
     }
     fclose(file);
     if (vector_size(buildings) == 0) {
-        printf("Error: couldn't read file'%s'\n", filename);
+        printf("Ошибка: не удалось прочитать файл'%s'\n", filename);
         vector_destroy(buildings);
         return NULL;
     }
-    printf("Successfully read %zu records from '%s'\n",vector_size(buildings), filename);
+    printf("Успешно прочитаны записи %zu из'%s'\n",vector_size(buildings), filename);
     return buildings;
 }
 void free_buildings_vector(vector* buildings) {

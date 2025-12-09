@@ -7,6 +7,7 @@
 #include "building_generator.h"
 #include "table_printer.h"
 
+#include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,7 +16,7 @@
 static Comparator get_comparator_by_field(SortOrder order, const char* field_name){
     
     if (field_name != NULL) {
-        fprintf(stderr, "Warning: Sorting by field '%s' is not supported. Using universal comparator\n");
+        fprintf(stderr, "Внимание: Нет файла для считывания\n");
     }
     if (order == ORDER_ASC) {
         return comparator_by_ascending;
@@ -42,9 +43,9 @@ static int data_generation(const ProgramArgs* args){
 
     if (args->output_file) {
         save_buildings_to_csv(buildings, args->output_file);
-        printf("The data has been successfully saved to a file: %s\n", args->output_file);
+        printf(": %s\n", args->output_file);
     } else {
-        puts("Generated data (CSV format):\n");
+        puts("Генерация данным произошла успешно(в csv формате):\n");
         write_buildings_to_stream(buildings, stdout);
     }
     vector_destroy(buildings);
@@ -55,21 +56,21 @@ static int data_generation(const ProgramArgs* args){
 
 static int data_sort(const ProgramArgs* args){
     if (args->input_file == NULL) {
-        fprintf(stderr, "Error:\n");
+        fprintf(stderr, "Считывание файла не успешно:\n");
         return 1;
     }
 
     vector* buildings = read_buildings_from_csv(args->input_file);
     if (buildings == NULL) {
-        fprintf(stderr, "Error: couldn't read data from the file\n");
+        fprintf(stderr, "Ошибка: не удалось прочитать данные из файла\n");
         return 1;
     }
 
     size_t count = vector_size(buildings);
-    printf("Read %zu bildings\n", count);
+    printf("Считано %zu зданий\n", count);
 
     if (count == 0) {
-        fprintf(stderr, "Error: the file does not contain data\n");
+        fprintf(stderr, "Ошибка: файл не содержит данных\n");
         vector_destroy(buildings);
         return 1;
     }
@@ -78,9 +79,9 @@ static int data_sort(const ProgramArgs* args){
 
     if (args->output_file) {
         save_buildings_to_csv(buildings, args->output_file);
-        printf("The sorted data is saved to a file: %s\n", args->output_file);
+        printf("Отсортированные данные сохраняются в файле: %s\n", args->output_file);
     } else {
-        puts("Sorted data (CSV format):\n");
+        puts("Отсортированные данные (формат CSV):\n");
         write_buildings_to_stream(buildings, stdout);
     }
     vector_destroy(buildings);
@@ -90,12 +91,12 @@ static int data_sort(const ProgramArgs* args){
 
 static int print_data(const ProgramArgs* args) {
     if (args->input_file == NULL) {
-        fprintf(stderr, "Error: there is no input file\n");
+        fprintf(stderr, "Ошибка: нет входного файла\n");
         return 1;
     }
     vector* buildings = read_buildings_from_csv(args->input_file);
     if (buildings == NULL) {
-        fprintf(stderr, "Error: the data has not been read '%s'\n", args->input_file);
+        fprintf(stderr, "Ошибка: данные не были считаны '%s'\n", args->input_file);
         return 1;
     }
 
@@ -103,7 +104,7 @@ static int print_data(const ProgramArgs* args) {
     printf("Read it %zu buildings\n", count);
 
     if (count == 0) {
-        fprintf(stderr, "Error: the file does not contain data\n");
+        fprintf(stderr, "Ошибка: файл не содержит данных\n");
         vector_destroy(buildings);
         return 1;
     }
@@ -118,10 +119,13 @@ static int print_data(const ProgramArgs* args) {
 }
 
 int main(int argc, char* argv[]){
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+
     srand(time(NULL));
     ProgramArgs args;
     if (!parse_arguments(argc, argv, &args)) {
-        fprintf(stderr, "Error: incorrect command line arguments\n");
+        fprintf(stderr, "Ошибка: неверные аргументы командной строки\n");
         return 1;
     }
     switch (args.mode) {
@@ -133,6 +137,6 @@ int main(int argc, char* argv[]){
         return print_data(&args);
     default:
         return 1;
-        fprintf(stderr, "Error: The program is broken\n");
+        fprintf(stderr, "Программа не работает\n");
     }
 }

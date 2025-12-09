@@ -28,7 +28,7 @@ void write_buildings_to_stream(const vector* buildings, FILE* stream){
     if (buildings == NULL || stream == NULL){
         return ;
     }
-    fprintf(stream, "developer,microdistrict,type,year,elevator,garbage_chute,apartments,floors,area\n");
+    fprintf(stream, "\n");
     size_t count = vector_size(buildings);
     for(size_t i = 0; i < count; i++){
         apartment_building* building = vector_get(buildings, i);
@@ -39,17 +39,17 @@ void write_buildings_to_stream(const vector* buildings, FILE* stream){
 
 void save_buildings_to_csv(const vector* buildings, const char* filename){
     if (buildings == NULL || filename == NULL){
-        puts("Errot: Data cannot be recorded\n");
+        puts("Ошибка: Данные не могут быть записаны\n");
         return;
     }
     FILE* file = fopen(filename, "w");
      if (file == NULL) {
-        puts("Error: Couldn't open fil");
+        puts("Ошибка: Не удалось открыть файл");
         return;
     }
     write_buildings_to_stream(buildings, file);
     fclose(file);
 
-    printf("The data has been successfully written to'%s'\n",filename);
+    printf("Данные были успешно записаны в'%s'\n",filename);
 }
 

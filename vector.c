@@ -88,7 +88,7 @@ void vector_expansion(vector* vec) {
     apartment_building* new_data = (apartment_building*)realloc(
         vec->data, new_capacity * sizeof(apartment_building));
     if (new_data == NULL) {
-        puts("Error: memory addition error\n");
+        puts("Ошибка: память не добавлена\n");
         return;
     }
     vec->data = new_data;
