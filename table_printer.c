@@ -104,7 +104,7 @@ void print_buildings_to_file(const vector* buildings, const char* filename) {
 
     FILE* file = fopen(filename, "w");
     if (file == NULL) {
-        fprintf(stderr, "Ошибка:Не удается открыть файл %s для записи\n", filename);
+        fprintf(stderr, "Ошибка: He удается открыть файл %s для записи\n", filename);
         return;
     }
 

@@ -9,21 +9,21 @@
 
 static void print_help(const char* program_name){
     printf("Использование: %s [РЕЖИМ] [ОПЦИИ]\n\n", program_name);
-    printf("Режимы (выберите один):\n");
-    printf("  --generate N, -g N   Сгенерировать N случайных зданий\n");
-    printf("  --sort, -s           Отсортировать здания\n");
-    printf("  --print, -P          Напечатать здания в виде таблицы\n\n");
+    puts("Режимы (выберите один):\n");
+    puts("  --generate N, -g N   Сгенерировать N случайных зданий\n");
+    puts("  --sort, -s           Отсортировать здания\n");
+    puts("  --print, -P          Напечатать здания в виде таблицы\n\n");
     
-    printf("Опции:\n");
-    printf("  --in ФАЙЛ, -i ФАЙЛ   Входной файл (stdin если не указан)\n");
-    printf("  --out ФАЙЛ, -o ФАЙЛ  Выходной файл (stdout если не указан)\n");
-    printf("  --type asc|desc, -t A|D  Порядок сортировки (по умолчанию asc)\n\n");
+    puts("Опции:\n");
+    puts("  --in ФАЙЛ, -i ФАЙЛ   Входной файл (stdin если не указан)\n");
+    puts("  --out ФАЙЛ, -o ФАЙЛ  Выходной файл (stdout если не указан)\n");
+    puts("  --type asc|desc, -t A|D  Порядок сортировки (по умолчанию asc)\n\n");
     
-    printf("Форматы:\n");
-    printf("  --in file.csv    или --in=file.csv    или -i file.csv\n");
-    printf("  --out file.csv   или --out=file.csv   или -o file.csv\n");
-    printf("  --type asc       или --type=asc       или -t A\n");
-    printf("  --type desc      или --type=desc      или -t D\n");
+    puts("Форматы:\n");
+    puts("  --in file.csv    или --in=file.csv    или -i file.csv\n");
+    puts("  --out file.csv   или --out=file.csv   или -o file.csv\n");
+    puts("  --type asc       или --type=asc       или -t A\n");
+    puts("  --type desc      или --type=desc      или -t D\n");
 }
 
 
