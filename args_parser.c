@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include "args_parser.h"
 
-#define PASS_ONE 6  // "--out=" имеет длину 6
-#define PASS_TWO 5  // "--in=" имеет длину 5
+#define PASS_ONE 6
+#define PASS_TWO 5
 
 static void print_help(const char* program_name){
     printf("Использование: %s [РЕЖИМ] [ОПЦИИ]\n\n", program_name);
