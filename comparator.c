@@ -72,3 +72,8 @@ int comparator_by_ascending(const apartment_building *a, const apartment_buildin
 
     return 0;
 }
+
+int comporator_reduction(const apartment_building *a,const apartment_building *b){
+    int res = comparator_by_ascending(a,b);
+    return -res;
+}

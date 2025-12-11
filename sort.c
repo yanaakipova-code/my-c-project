@@ -2,11 +2,6 @@
 #include "vector.h"
 #include <string.h>
 
-int comporator_reduction(const apartment_building *a,const apartment_building *b){
-    int res = comparator_by_ascending(a,b);
-    return -res;
-}
-
 void selection_sort(vector* vec, Comparator comp) {
     if (!vector_is_valid_and_not_empty(vec)) {
         return;
