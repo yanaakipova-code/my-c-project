@@ -1,5 +1,6 @@
 #include "sort.h"
 #include "vector.h"
+#include "comparator.h"
 #include <string.h>
 
 void selection_sort(vector* vec, Comparator comp) {
