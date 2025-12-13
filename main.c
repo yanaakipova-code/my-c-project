@@ -84,12 +84,20 @@ int main(int argc, char* argv[]) {
             printf("Прочитано %zu зданий\n", vector_size(buildings));
 
             Comparator comp = get_comparator(args.order);
+            
+            if (args.sort_algorithm == SORT_SELECTION) {
+                printf("Используется сортировка выбором\n");
+            } else {
+                printf("Используется сортировка слиянием\n");
+            }
+            
             if (args.order == ORDER_ASC) {
                 puts("Сортировка в порядке возрастания...\n");
             } else {
                 puts("Сортировка в порядке убывания...\n");
-            }   
-            selection_sort(buildings, comp);
+            }
+            
+            sort_vector(buildings, comp, args.sort_algorithm);
             
             if (args.output_file) {
                 save_buildings_to_csv(buildings, args.output_file);
