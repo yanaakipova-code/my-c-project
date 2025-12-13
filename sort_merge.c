@@ -3,7 +3,6 @@
 #include "comparator.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 
 /* слияние двух отсортированных частей*/
 static void merge(vector* vec, size_t left, size_t mid, size_t right, 
