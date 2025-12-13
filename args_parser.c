@@ -17,19 +17,23 @@ static void print_help(const char* program_name){
     puts("Опции:\n");
     puts("  --in ФАЙЛ, -i ФАЙЛ   Входной файл (stdin если не указан)\n");
     puts("  --out ФАЙЛ, -o ФАЙЛ  Выходной файл (stdout если не указан)\n");
-    puts("  --type asc|desc, -t A|D  Порядок сортировки (по умолчанию asc)\n\n");
+    puts("  --type asc|desc, -t A|D  Порядок сортировки (по умолчанию asc)\n");
+    puts("  --algorithm selection|merge, -a S|M  Алгоритм сортировки (по умолчанию selection)\n\n");
     
     puts("Форматы:\n");
     puts("  --in file.csv    или --in=file.csv    или -i file.csv\n");
     puts("  --out file.csv   или --out=file.csv   или -o file.csv\n");
     puts("  --type asc       или --type=asc       или -t A\n");
     puts("  --type desc      или --type=desc      или -t D\n");
+    puts("  --algorithm selection или --algorithm=selection или -a S\n");
+    puts("  --algorithm merge     или --algorithm=merge     или -a M\n");
 }
 
 
 bool parse_arguments(int argc, char* argv[], ProgramArgs* args){
     args->mode = MODE_ERROR;
     args->order = ORDER_ASC;
+    args->sort_algorithm = SORT_SELECTION;
     args->input_file = NULL;
     args->output_file = NULL;
     args->generate_count = 0;
@@ -147,6 +151,45 @@ bool parse_arguments(int argc, char* argv[], ProgramArgs* args){
                 }
             } else {
                 fprintf(stderr, "Ошибка: -t требует значение\n");
+                return false;
+            }
+        }
+        
+        else if (strcmp(arg, "--algorithm") == 0) {
+            if (i + 1 < argc) {
+                i++;
+                if (strcmp(argv[i], "selection") == 0) {
+                    args->sort_algorithm = SORT_SELECTION;
+                } else if (strcmp(argv[i], "merge") == 0) {
+                    args->sort_algorithm = SORT_MERGE;
+                } else {
+                    fprintf(stderr, "Ошибка: --algorithm принимает selection или merge\n");
+                    return false;
+                }
+            } else {
+                fprintf(stderr, "Ошибка: --algorithm требует значение\n");
+                return false;
+            }
+        }
+        else if (strcmp(arg, "--algorithm=selection") == 0) {
+            args->sort_algorithm = SORT_SELECTION;
+        }
+        else if (strcmp(arg, "--algorithm=merge") == 0) {
+            args->sort_algorithm = SORT_MERGE;
+        }
+        else if (strcmp(arg, "-a") == 0) {
+            if (i + 1 < argc) {
+                i++;
+                if (strcmp(argv[i], "S") == 0 || strcmp(argv[i], "selection") == 0) {
+                    args->sort_algorithm = SORT_SELECTION;
+                } else if (strcmp(argv[i], "M") == 0 || strcmp(argv[i], "merge") == 0) {
+                    args->sort_algorithm = SORT_MERGE;
+                } else {
+                    fprintf(stderr, "Ошибка: -a принимает S|selection или M|merge\n");
+                    return false;
+                }
+            } else {
+                fprintf(stderr, "Ошибка: -a требует значение\n");
                 return false;
             }
         }
