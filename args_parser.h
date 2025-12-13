@@ -1,9 +1,6 @@
 #pragma once
 #include <stdbool.h> 
-typedef enum {
-    SORT_SELECTION,
-    SORT_MERGE
-} SortAlgorithm;
+#include "sort.h"
 typedef enum{
     MODE_ERROR,
     MODE_GENERATE,
