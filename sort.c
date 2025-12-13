@@ -27,3 +27,21 @@ void selection_sort(vector* vec, Comparator comp) {
     }
 
 }
+
+void sort_vector(vector* vec, Comparator comp, SortAlgorithm algorithm) {
+    if (!vector_is_valid_and_not_empty(vec)) {
+        return;
+    }
+    
+    switch (algorithm) {
+        case SORT_SELECTION:
+            selection_sort(vec, comp);
+            break;
+        case SORT_MERGE:
+            sort_merge(vec, comp);
+            break;
+        default:
+            selection_sort(vec, comp);
+            break;
+    }
+}
