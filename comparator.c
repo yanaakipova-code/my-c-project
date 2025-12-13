@@ -1,4 +1,5 @@
-#include <comparator.h>
+#include "comparator.h"
+#include <string.h>
 
 int comparator_by_ascending(const apartment_building *a, const apartment_building *b) {
     if (a->year != b->year) {
