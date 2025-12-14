@@ -1,0 +1,14 @@
++----------------------+-----------------+--------------+--------+----------+------------------+--------------+------------+-----------------+
+| Developer            | Microdistrict   | Type         | Year   | Elevator | Garbage Chute    | Apartments   | Floors     | Area (m²)      |
++----------------------+-----------------+--------------+--------+----------+------------------+--------------+------------+-----------------+
+| Gorod                | North           | Brick        | 1993   | YES      | YES              | 315          | 21         | 134.60          |
+| Pifagor              | Tagansky        | Brick        | 1986   | NO       | YES              | 20           | 4          | 47.90           |
+| Strizhi              | Academic        | Brick        | 1979   | NO       | YES              | 12           | 1          | 89.60           |
+| Gorod                | South           | Monolith     | 1976   | YES      | YES              | 126          | 14         | 121.00          |
+| PIK                  | Tagansky        | Monolith     | 1981   | YES      | YES              | 189          | 21         | 167.30          |
+| Gorod                | North           | Monolith     | 1970   | YES      | YES              | 100          | 25         | 166.90          |
+| Pifagor              | North           | Monolith     | 1978   | YES      | YES              | 105          | 21         | 159.80          |
+| Pifagor              | Tverskoy        | Brick        | 1974   | YES      | YES              | 299          | 23         | 103.70          |
+| Strizhi              | Tverskoy        | Brick        | 1982   | YES      | YES              | 130          | 26         | 90.60           |
+| Simvol               | Academic        | Panel        | 1984   | YES      | YES              | 64           | 16         | 102.50          |
++----------------------+-----------------+--------------+--------+----------+------------------+--------------+------------+-----------------+

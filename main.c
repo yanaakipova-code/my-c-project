@@ -7,7 +7,6 @@
 #include "building_generator.h"
 #include "table_printer.h"
 
-
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,7 +22,6 @@ static Comparator get_comparator(SortOrder order) {
 }
 
 int main(int argc, char* argv[]) {
-
     #ifdef _WIN32
         SetConsoleOutputCP(CP_UTF8);
         SetConsoleCP(CP_UTF8);
@@ -53,10 +51,12 @@ int main(int argc, char* argv[]) {
                 apartment_building b = generate_random_building();
                 vector_push_back(buildings, &b);
             }
+            
             if (args.output_file) {
                 save_buildings_to_csv(buildings, args.output_file);
                 printf("Данные сохранены в файл: %s\n", args.output_file);
             } else {
+                write_csv_header(stdout);
                 write_buildings_to_stream(buildings, stdout);
             }
             
@@ -103,6 +103,7 @@ int main(int argc, char* argv[]) {
                 save_buildings_to_csv(buildings, args.output_file);
                 printf("Отсортированные данные сохранены в файл: %s\n", args.output_file);
             } else {
+                write_csv_header(stdout);
                 write_buildings_to_stream(buildings, stdout);
             }
             
@@ -116,22 +117,9 @@ int main(int argc, char* argv[]) {
                 printf("Чтение данных из файла: %s\n", args.input_file);
                 buildings = read_buildings_from_csv(args.input_file);
             } else {
-                puts("Введите имя файла с данными: ");
-                char filename[256];
-                if (!fgets(filename, sizeof(filename), stdin)) {
-                    fprintf(stderr, "Ошибка: не удалось прочитать имя файла\n");
-                    result = 1;
-                    break;
-                }
-                filename[strcspn(filename, "\n")] = '\0';
-                
-                if (strlen(filename) == 0) {
-                    fprintf(stderr, "Ошибка: имя файла не может быть пустым\n");
-                    result = 1;
-                    break;
-                }
-                
-                buildings = read_buildings_from_csv(filename);
+                // Чтение из stdin для работы с pipe
+                printf("Чтение данных из стандартного ввода...\n");
+                buildings = read_buildings_from_stream(stdin);
             }
             
             if (!buildings || vector_size(buildings) == 0) {
