@@ -122,7 +122,7 @@ void vector_insertion(vector* vec, size_t index, const apartment_building* value
     if (!vector_is_valid(vec) || value == NULL || index > vec->size){
         return;
     }
-    if (vec->size > vec->capacity) {
+    if (vec->size >= vec->capacity) {
         vector_expansion(vec);
     }
     for (size_t i = vec->size; i > index; i--) {
