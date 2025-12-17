@@ -68,7 +68,7 @@ apartment_building generate_random_building(){
           building.garbage_chute = (rand() % 100 < ODDS70);
      }
 
-     int apartments_per_floor = MIN_APARTMENTS_PER_FLOOR + rand() % MAX_APARTMENTS_PER_FLOOR;
+     int apartments_per_floor = MIN_APARTMENTS_PER_FLOOR + rand() % (MAX_APARTMENTS_PER_FLOOR - MIN_APARTMENTS_PER_FLOOR + 1);
      building.count_apartments = building.count_floors * apartments_per_floor;
      building.area_apartment = MIN_AREA + (rand() % AREA_RANGE) / 10.0f;
 
@@ -79,17 +79,35 @@ void  generate_rondom_building_cvs(unsigned int count_home, const char *file_nam
      FILE *file_pointer = fopen(file_name, "w");
      if(file_pointer){
           fputs("Название застройщика, Название микрорайона, Тип, Год постройки, \
-               Наличие лифта, Количество квартир, Количество этажей,Средняя площадь квартиры\n", file_pointer);
+               Наличие лифта,Наличие мусоропровода, Количество квартир, Количество этажей,Средняя площадь квартиры\n", file_pointer);
           for(unsigned int i = 0; i < count_home; i++) {
             apartment_building building = generate_random_building();
             
           char buffer[130];
+          const char* elevator_str;
+          const char* garbage_chute_str;
+
+          if (building.elevator == true) {
+               elevator_str = "true";
+          } else {
+               elevator_str = "false";
+          }
+
+          if (building.garbage_chute == true) {
+               garbage_chute_str = "true";
+          } else {
+               garbage_chute_str = "false";
+          }
           sprintf(buffer, "%s,%s,%s,%u,%s,%s,%hu,%hu,%.1f\n",
-                   building.developer, building.microdistrict, building.type,
-                   building.year, building.elevator ? "true" : "false",
-                   building.garbage_chute ? "true" : "false",
-                   building.count_apartments, building.count_floors,
-                   building.area_apartment);
+               building.developer,
+               building.microdistrict, 
+               building.type,
+               building.year,
+               elevator_str,
+               garbage_chute_str,
+               building.count_apartments,
+               building.count_floors,
+                building.area_apartment);
           fputs(buffer, file_pointer);
           }
           fclose(file_pointer);
