@@ -57,7 +57,7 @@ static void merge_sort_recursive(vector* vec, size_t left, size_t right,
         merge(vec, left, mid, right, comp, temp);
     }
 }
-/* сама сортировка */
+/* выделяет временную память и запускает рекурсию */
 void sort_merge(vector* vec, Comparator comp) {
     if (!vector_is_valid_and_not_empty(vec)) return;
     
