@@ -117,7 +117,6 @@ int main(int argc, char* argv[]) {
                 printf("Чтение данных из файла: %s\n", args.input_file);
                 buildings = read_buildings_from_csv(args.input_file);
             } else {
-                // Чтение из stdin для работы с pipe
                 printf("Чтение данных из стандартного ввода...\n");
                 buildings = read_buildings_from_stream(stdin);
             }
